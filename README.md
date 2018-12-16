@@ -19,7 +19,7 @@ Rakenduse muutmiseks selle toimimise ajal tuleb avada ka teine cmd.
 * `import Route from '@ember/routing/route';
 
 
-export default Route.extend({
+`export default Route.extend({
 
     model(){
         return this.store.findAll('task');
@@ -42,9 +42,9 @@ export default Route.extend({
 * Genereerime modeli
 * `ember g model task`
 
-* import DS from 'ember-data';
+`import DS from 'ember-data';
 
 export default DS.Model.extend({
     title:DS.attr('string'),
     isdone:DS.attr('boolean')
-});
+});`
