@@ -1,0 +1,12 @@
+<div>
+    {{input type="text" id="new-todo" placeholder="Enter task"
+    value=task enter="addTask"}}
+    <ul>
+        {{#each model as |taskUnit|}}
+        <li  {{action 'toggleDone' taskUnit }} class="{{if taskUnit.isdone 'completed'}}">
+            <h3>{{taskUnit.title}} </h3>
+            <button class="destroy" {{action "deleteTodo" taskUnit}}>DELETE TASK</button>
+        </li>
+        {{/each}}
+    </ul>
+</div>
