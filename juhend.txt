@@ -1,0 +1,127 @@
+---EELTÖÖ
+    1. npm install -g ember-cli
+    2. ember new Todo App
+    3. cd Todo App
+    4. npm install
+    5. ember serve
+
+---PROJEKTI MUUTMINE
+Et projekti muuta samal ajal, kui see töötab, ava teine cmd
+    1. ember install ember-cli-mirage
+        2. Mirage config-isse: 
+        this.get('/tasks');
+        this.patch('/tasks/:id');
+
+        this.get('/tasks/:id');
+        this.post('/tasks');
+        this.del('/tasks/:id');
+        3. Mirage factories:
+        export default Mirage.Factory.extend({
+        title(i) { return `Todo title ${i + 1}`; },
+        complete: faker.list.random(true, false)
+        });
+    4. ember g model task
+        5. export default DS.Model.extend({
+        title:DS.attr('string'),
+        isdone:DS.attr('boolean')
+        });
+    6. ember generate route tasks 
+        7. model(){
+            return this.store.findAll('task');
+        },
+        actions:{
+            toggleDone(task){
+                task.toggleProperty('isdone');
+            },
+            addTask() {
+
+                if (this.get('controller').get('task')) {
+                    this.get('store').createRecord("task", {
+                        id:Date.now(),
+                        title: this.get('controller').get('task'),
+                        isdone: false
+                    });
+                }
+                this.get('controller').set('task', "");
+
+            },
+            deleteTodo(task) {
+                task.destroyRecord();
+            }
+            }});
+    7. templates/tasks.hbs
+        <div id="newTodoDiv">
+        <center>
+            {{input type="text" id="new-todo" placeholder="Enter task"
+            value=task enter="addTask"}}
+            <br>
+            <button type="button" class="btn btn-success" {{action "addTask" taskUnit}}>Add task</button>
+        </center>
+        <br>
+        </div>
+        <div id="tasksDiv">
+            <h2>Tasks</h2>
+            <ul>
+                {{#each model as |taskUnit|}}
+                <li  {{action 'toggleDone' taskUnit }} class="{{if taskUnit.isdone 'completed'}}">
+                    <h3>Name: {{taskUnit.title}} </h3>
+                    <br>
+                    <button type="button" class="btn btn-danger" {{action "deleteTodo" taskUnit}}>Delete</button>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    8. styles/app.css 
+        body{
+        margin:auto;
+        width:500px;
+        }
+
+        #newTodoDiv{
+            border-style: solid;
+            min-height: 80px;
+            min-width: 150px;
+            background-color: lightblue;
+        }
+        #tasksDiv{
+            text-align: center;
+            border-style: solid;
+            min-height: 120px;
+            min-width: 150px;
+            background-color: lightblue;  
+        }
+
+        #new-todo{
+            margin: 10px;
+            padding: 10px;
+            float:center;
+            top:10%;
+        }
+
+        li{
+            margin-left: 10px;
+            padding-left: 10px;
+
+        }
+        button{
+            color:white;
+            background-color: red;
+        }
+
+        .completed{
+            text-decoration:line-through;
+
+        }
+
+
+
+        ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            float:center;
+        }
+
+        h3{
+            text-transform: uppercase;
+        }
