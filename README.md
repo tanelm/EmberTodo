@@ -16,10 +16,11 @@ Rakenduse muutmiseks selle toimimise ajal tuleb avada ka teine cmd.
 * Genereerime route 
 * `ember g route tasks`
 
-* `import Route from '@ember/routing/route';
+```
+import Route from '@ember/routing/route';
 
 
-`export default Route.extend({
+export default Route.extend({
 
     model(){
         return this.store.findAll('task');
@@ -37,14 +38,17 @@ Rakenduse muutmiseks selle toimimise ajal tuleb avada ka teine cmd.
             this.get('controller').set('task', "");
 
         }
-}});`
+}});
+```
 
 * Genereerime modeli
 * `ember g model task`
 
-`import DS from 'ember-data';
+```
+import DS from 'ember-data';
 
 export default DS.Model.extend({
     title:DS.attr('string'),
     isdone:DS.attr('boolean')
-});`
+});
+```
