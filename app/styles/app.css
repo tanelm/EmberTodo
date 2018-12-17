@@ -3,13 +3,24 @@ body{
     width:500px;
 }
 
-#todoDiv{
+#newTodoDiv{
+    border-style: solid;
+    min-height: 80px;
+    min-width: 150px;
+    background-color: lightblue;
+}
+#tasksDiv{
+    text-align: center;
+    border-style: solid;
+    min-height: 120px;
+    min-width: 150px;
+    background-color: lightblue;  
 }
 
 #new-todo{
     margin: 10px;
     padding: 10px;
-    float:left;
+    float:center;
     top:10%;
 }
 
@@ -21,11 +32,6 @@ li{
 button{
     color:white;
     background-color: red;
-}
-div{
-    position:relavive;
-    top: 10%;
-    left: 35%;
 }
 
 .completed{
@@ -39,7 +45,7 @@ ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    float:right;
+    float:center;
 }
 
 h3{
